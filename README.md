@@ -17,5 +17,6 @@ docker-compose up
 DOCKER_COMMAND=test docker-compose up
 ```
 
+http://drive.google.com/uc?export=view&id=13ob5VLKnNIN0eEuietCT2XGnIL-Lz1Cj
 # Application Architecture
-![Application Architecture](https://drive.google.com/file/d/13ob5VLKnNIN0eEuietCT2XGnIL-Lz1Cj/view) 
+![Application Architecture](http://drive.google.com/uc?export=view&id=13ob5VLKnNIN0eEuietCT2XGnIL-Lz1Cj) 
