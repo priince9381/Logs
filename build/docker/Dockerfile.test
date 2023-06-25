@@ -1,0 +1,14 @@
+# Use the official Go image as the base image
+FROM golang:latest
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the Go script to the working directory
+COPY ./script/main.go go.mod /app/
+
+# Build the Go script
+RUN go build -o app
+
+# Set the entrypoint command to run the Go script
+ENTRYPOINT ["./app"]

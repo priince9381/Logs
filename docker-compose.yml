@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: ./  # Specify the correct build context
+      dockerfile: build/docker/Dockerfile
+    ports:
+      - 8000:8000
+    image: api
+    container_name: api
+    restart: on-failure
+    depends_on:
+      - database
+    networks:
+      - app-network
+  database:
+    image: postgres
+    container_name: app-db
+    environment:
+      POSTGRES_USER: newuser
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: log
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: [ "CMD","ping", "-h", "localhost" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - app-network
+  test:
+    image: api-test
+    container_name: api-test
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: build/docker/Dockerfile.test
+    depends_on:
+      - api
+    volumes:
+      - ./data:/app/data  # Mount a volume for data persistence or remove this line if not needed
+    environment:
+      - TZ=UTC  # Set the timezone if needed
+    networks:
+      - app-network
+    entrypoint: sh -c "if [ \"$DOCKER_COMMAND\" = 'test' ]; then go run main.go; else sleep infinity; fi"
+networks:
+  app-network:
