@@ -7,6 +7,7 @@ WORKDIR /app
 COPY ./cmd/api .
 # Copy the Go module files to the working directory
 COPY go.mod .
+COPY go.sum .
 
 # Download and install the application dependencies
 RUN go mod download
