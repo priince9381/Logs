@@ -20,7 +20,7 @@ type DatabaseImpl struct {
 func InitializeDB() (*DatabaseImpl, error) {
 	maxRetries := 10
 	retryInterval := 3 * time.Second
-
+	// Todo To create a secure method to fetch secrets
 	connStr := "postgres://newuser:password@database:5432/log?sslmode=disable"
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
@@ -42,6 +42,7 @@ func InitializeDB() (*DatabaseImpl, error) {
 	return nil, fmt.Errorf("failed to connect to the database after multiple retries")
 }
 
+// Todo To Create a generic Method to handle database query
 func (d *DatabaseImpl) StoreLogInDatabase(log *models.Log) error {
 	// Insert the log into the database
 	_, err := d.db.Exec(`
