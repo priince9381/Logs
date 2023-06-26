@@ -11,7 +11,7 @@ type LogBuffer struct {
 
 func NewLogBuffer() *LogBuffer {
 	return &LogBuffer{
-		logs: make(chan models.Log, 1000), // Define your buffer size here
+		logs: make(chan models.Log, 1000), // Define the buffer to include number of request
 	}
 }
 

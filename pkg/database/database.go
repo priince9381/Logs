@@ -20,7 +20,7 @@ type DatabaseImpl struct {
 func InitializeDB() (*DatabaseImpl, error) {
 	maxRetries := 10
 	retryInterval := 3 * time.Second
-	// Todo To create a secure method to fetch secrets
+	// Todo To create a secure method to fetch secrets using AmazonDynamoDB
 	connStr := "postgres://newuser:password@database:5432/log?sslmode=disable"
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
